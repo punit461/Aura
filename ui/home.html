@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Email Assistant</title>
+    <link rel="icon" href="assets/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/homestyles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="userGreeting">Hello, Guest</h1>
+           
+        </header>
+        <main>
+            <button id="toggleEmailsBtn">Read Unread Emails</button>
+            <button id="generateRepliesBtn">Generate Email Replies</button>
+            <div id="emailList" class="hidden">
+                <h2>Unread Emails</h2>
+                <div id="emails"></div>
+                <div class="pagination">
+                    <button id="prevBtn">Previous</button>
+                    <span id="pageInfo"></span>
+                    <button id="nextBtn">Next</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.min.js"></script>
+    <script type="module" src="js/script.js"></script>
+</body>
+</html>

@@ -3,3 +3,4 @@
 pg_data
 rabbitmq
 __pycache__
+.idea\

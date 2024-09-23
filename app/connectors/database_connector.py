@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker, Session, declarative_base
@@ -14,7 +13,7 @@ SQL_HOST = os.getenv("POSTGRES_HOST")
 SQL_DB = os.getenv("POSTGRES_DB")
 SQLALCHEMY_DATABASE_URL = f"postgresql://{SQL_USER}:{SQL_PASSWORD}@{SQL_HOST}/{SQL_DB}"
 
-db_connections:dict[str,dict[str,Session|datetime]] = {}
+db_connections: dict[str, dict[str, Session | datetime]] = {}
 
 # Create a SQLAlchemy engine
 engine = sa.create_engine(
@@ -36,6 +35,7 @@ def only_master(db: Session):
     else:
         raise Exception(INVALID_SCHEMA)
 
+
 def get_master_database():
     return build_db_session(MASTER_SCHEMA)
 
@@ -51,5 +51,6 @@ def build_db_session(schema: str) -> Session:
     db.execute(sa.text('set search_path to "%s"' % schema))
     return db
 
-def get_connected_schema(db:Session)->str:
+
+def get_connected_schema(db: Session) -> str:
     return db.connection().dialect.default_schema_name

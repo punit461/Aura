@@ -1,7 +1,7 @@
 python-dotenv>=1.0.0
 psycopg2-binary>=2.9.6
 alembic>=1.11.1
-fastapi>=0.97.0
+fastapi~=0.85.1
 uvicorn>=0.22.0
 pytest>=7.3.2
 fastapi-mail>=1.2.8
@@ -18,3 +18,7 @@ requests>=2.31.0
 sqlalchemy>=2.0.18
 schedule>=1.2.0
 pytest
+starlette~=0.20.4
+pika
+psycopg
+psycopg2

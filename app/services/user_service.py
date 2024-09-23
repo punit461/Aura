@@ -5,12 +5,13 @@ from sqlalchemy.orm import Session
 from app.entities.user import User
 from app.utils.project_dependencies import master_database
 
+
 @dataclass
 class UserService:
     db: Session = Depends(master_database)
 
     def create_user(
-        self, name: str, username: EmailStr, password: str, role: str, contact: str
+            self, name: str, username: EmailStr, password: str, role: str, contact: str
     ) -> User:
         user = User()
         user.name = name
@@ -26,7 +27,7 @@ class UserService:
         return self.db.query(User).all()
 
     def validate_user(self, username: EmailStr, password: str) -> User | None:
-        # this logic should be remvoed once we create some users.
+        # this logic should be removed once we create some users.
         if self.db.query(User).count() == 0:
             return self.create_user(
                 name=username.split("@")[0],

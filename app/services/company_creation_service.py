@@ -14,9 +14,9 @@ from app.utils.project_dependencies import master_database
 from app.utils.utils import get_project_root, get_randome_str
 import argparse
 
+
 @dataclass
 class CompanyCreationService:
-
     db: Session = Depends(master_database)
 
     @staticmethod

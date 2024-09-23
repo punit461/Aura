@@ -7,9 +7,8 @@ from dotenv import load_dotenv
 from sqlalchemy import MetaData, create_engine, text
 
 from alembic import context
+
 load_dotenv()
-
-
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -20,8 +19,6 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 logger = logging.getLogger("alembic.env")
-
-
 
 # gather section names referring to different
 # databases.  These are named "engine1", "engine2"
@@ -40,6 +37,7 @@ logger = logging.getLogger("alembic.env")
 #       'engine2':mymodel.metadata2
 # }
 target_metadata = None
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -91,7 +89,8 @@ def run_migrations_online():
     print("#############################################################")
     engine = create_engine(url)
 
-    is_autogenerating:bool = True if config.cmd_opts and hasattr(config.cmd_opts,'autogenerate') and config.cmd_opts.autogenerate else False
+    is_autogenerating: bool = True if config.cmd_opts and hasattr(config.cmd_opts,
+                                                                  'autogenerate') and config.cmd_opts.autogenerate else False
 
     targeted_schema = context.get_x_argument(as_dictionary=True).get("tenant")
 
@@ -104,16 +103,17 @@ def run_migrations_online():
 
     translated = entities.Base.metadata
     with engine.connect() as connection:
-        if not is_autogenerating :
+        if not is_autogenerating:
             if targeted_schema:
-                schemas = list[str](map(lambda row: row[0],connection.execute(text("SELECT schema FROM public.companies")).fetchall()))
+                schemas = list[str](
+                    map(lambda row: row[0], connection.execute(text("SELECT schema FROM public.companies")).fetchall()))
                 if targeted_schema in schemas:
                     translated = MetaData(schema=targeted_schema)
                 else:
                     raise Exception("schema not found")
                 #re assign the selected schema to the table
                 print("#############################")
-                print('updating schema:',translated.schema)
+                print('updating schema:', translated.schema)
                 print("#############################")
 
                 connection.execute(text('CREATE SCHEMA IF NOT EXISTS "%s"' % translated.schema))
@@ -125,11 +125,12 @@ def run_migrations_online():
             connection=connection,
             target_metadata=translated,
             compare_type=True,
-            include_schemas= not is_autogenerating,
+            include_schemas=not is_autogenerating,
             process_revision_directives=process_revision_directives
         )
         with context.begin_transaction():
             context.run_migrations()
+
 
 if context.is_offline_mode():
     run_migrations_offline()

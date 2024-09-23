@@ -22,8 +22,8 @@ router = APIRouter(tags=["Authentication"])
     status_code=status.HTTP_200_OK,
 )
 async def login(
-    request: LoginRequest,
-    service:UserService = Depends(UserService)
+        request: LoginRequest,
+        service: UserService = Depends(UserService)
 ) -> LoginResponse:
     user = service.validate_user(request.userName, request.password)
     if user and user.verify_password(request.password):
