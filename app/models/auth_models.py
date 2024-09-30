@@ -1,15 +1,10 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
 
-class LoginRequest(BaseModel):
-    userName: EmailStr
-    password: str
-
-
-class LoginResponse(BaseModel):
-    access_token: str
-    name: str
-    role: str
-    id: int
-    contact: str
-
+class DeviceCodeResponse(BaseModel):
+    user_code: str
+    device_code: str
+    verification_uri: str
+    expires_in: int
+    interval: int
+    message: str

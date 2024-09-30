@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from app.services.company_creation_service import CompanyCreationService
 import subprocess
 import os
 
@@ -14,7 +13,6 @@ def start_dramatique_process():
     print('dramatiq background process started')
 
 def __on_app_started():
-    CompanyCreationService.upgrade_all()
     if not os.getenv("IS_DOCKER"):
         start_dramatique_process()
    

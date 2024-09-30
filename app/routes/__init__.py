@@ -10,5 +10,5 @@ def setup_routes(app: FastAPI):
         app.include_router(route)
 
     for route in PROTECTED_ROUTES:
-        dependcies = [Depends(security), Depends(verify_auth_token)]
+        # dependcies = [Depends(security), Depends(verify_auth_token)]
         app.include_router(route, dependencies=dependcies)

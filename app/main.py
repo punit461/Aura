@@ -14,8 +14,14 @@ setup_routes(app)
 setup_middlewares(app)
 setup_event_handlers(app)
 
-@app.get("/")
+# Get the absolute path to the UI folder
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UI_DIR = os.path.join(BASE_DIR, "../ui")
+
+app.mount("/ui", StaticFiles(directory=UI_DIR),name='ui')
+
+@app.get("/", include_in_schema=False)
 async def read_index():
-    return FileResponse("../ui/index.html")
+    return FileResponse(os.path.join(UI_DIR, "index.html"))
 
 
